@@ -2,10 +2,10 @@ package com.dsa.arraylist;
 
 public class DynamicArray {
 
-    int[] arr;
-    int size;
-    int capacity;
-    static  final int intialCapacity = 16;
+    private int[] arr;
+    private int size;
+    private int capacity;
+    private static  final int intialCapacity = 16;
 
     public DynamicArray(){
         size=0;
