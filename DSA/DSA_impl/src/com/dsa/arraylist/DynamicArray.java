@@ -1,22 +1,23 @@
 package com.dsa.arraylist;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
-public class DynamicArray {
+public class DynamicArray<T> implements Iterable{
 
-    private int[] arr;
+    private T[] arr;
     private int size;
     private int capacity;
-    private static  final int intialCapacity = 16;
+    private static  final int intialCapacity = 2;
 
     public DynamicArray(){
         size=0;
-        arr=new int[16];
+        arr= (T[]) new Object[intialCapacity];
         capacity = intialCapacity;
 
     }
 
-    public void add(int val) {
+    public void add(T val) {
         if(size==capacity){
             expandCapacity();
         }
@@ -35,15 +36,68 @@ public class DynamicArray {
         System.out.println();
     }
 
-    public void insertAtPos(int index, int val) {
-        for(int i=size+1;i>=index;i--){
+    public void insertAtPos(int index, T val) {
+        if(index>size){
+            throw new ArrayIndexOutOfBoundsException("Invalid position");
+        }
+        if(capacity==size){
+            expandCapacity();
+        }
+        for(int i=size;i>index;i--){
             arr[i]=arr[i-1];
-            System.out.println(i);
         }
         arr[index]=val;
         size++;
     }
 
-    public void deleteAtPos(int i) {
+    public void deleteAtPos(int pos) {
+        for(int i=pos;i<=size;i++){
+            arr[i]=arr[i+1];
+        }
+        size--;
+        shrinkArray();
+    }
+    private void shrinkArray(){
+        if(capacity > intialCapacity && capacity >3*size){
+            capacity/=2;
+            arr=Arrays.copyOf(arr,capacity);
+        }
+    }
+    public int length(){
+        return size;
+    }
+
+    public void deleteAtEnd() {
+        size--;
+    }
+
+    public void deleteFromBegin() {
+        for(int i=0;i<size;i++){
+            arr[i]=arr[i+1];
+        }
+        size--;
+        shrinkArray();
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iterator<T>() {
+            int index = 0;
+            @Override
+            public boolean hasNext() {
+                return index<size;
+            }
+
+            @Override
+            public T next() {
+                return arr[index++];
+            }
+        };
+    }
+    public void display1(){
+        for(T i:arr){
+            System.out.println(i+" ");
+
+        }
     }
 }
