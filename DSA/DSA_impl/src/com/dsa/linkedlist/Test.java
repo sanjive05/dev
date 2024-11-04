@@ -10,5 +10,7 @@ public class Test {
         list.insertAtPos(3,78);
         list.insertAtPos(5,8);
         list.display();
+        list.deleteAtPos(3);
+        list.display();
     }
 }

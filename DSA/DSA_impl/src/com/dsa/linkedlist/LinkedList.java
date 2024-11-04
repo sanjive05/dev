@@ -3,6 +3,18 @@ package com.dsa.linkedlist;
 public class LinkedList {
     Node head;
 
+    public void deleteAtPos(int pos) {
+        Node temp = head , prev = null;
+        for(int i=0;i<pos;i++){
+            if(temp==null){
+                throw new IllegalArgumentException("Invalid Position...");
+            }
+            prev = temp;
+            temp = temp.next;
+        }
+        prev.next = temp.next;
+    }
+
 
     class Node{
         int data;
@@ -34,7 +46,7 @@ public class LinkedList {
         for(int i=0;i<pos-1;i++){
             temp=temp.next;
             if(temp==null){
-                throw new ArrayIndexOutOfBoundsException("Invalid Position");
+                throw new IllegalArgumentException("Invalid Position  "+pos);
             }
         }
         newNode.next=temp.next;
