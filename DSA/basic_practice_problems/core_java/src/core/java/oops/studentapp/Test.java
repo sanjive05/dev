@@ -18,7 +18,9 @@ public class Test {
 				service.getAllData();
 				break;
 			case 2:
-				service.getStudentData();
+				System.out.println("Enter the student Id : ");
+				int sid=  sc.nextInt();
+				service.getStudentData(sid);
 				break;
 			case 3:
 				System.out.println("Enter student name : ");
@@ -27,7 +29,8 @@ public class Test {
 				String std = sc.next();
 				System.out.println("Enter student bloodgroup : ");
 				String bloodGroup =sc.next();
-				service.addStudentData(name,std,bloodGroup);
+				System.out.println(service.addStudentData(name,std,bloodGroup));
+				
 				break;
 			
 			case 4:
