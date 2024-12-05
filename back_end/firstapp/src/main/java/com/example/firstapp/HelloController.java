@@ -10,8 +10,8 @@ public class HelloController {
         return "Hello World!...";
     }
     @PostMapping("/hello")
-    public String helloPost(@RequestBody String name){
-        return "Hello "+name+" !!!";
+    public Student helloPost(@RequestBody String name){
+        return new Student("Hello "+name);
     }
 
 }
