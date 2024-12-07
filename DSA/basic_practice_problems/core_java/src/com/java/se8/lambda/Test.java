@@ -10,9 +10,8 @@ public class Test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		 Country india = (int age)->{
-			 System.out.println("Your salary is "+ age*10000);
-		 };
+		 Country india = (int age)->{ System.out.println("Your salary is "+ age*10000); };
+		 
 		 india.salary(21);
 	}
 

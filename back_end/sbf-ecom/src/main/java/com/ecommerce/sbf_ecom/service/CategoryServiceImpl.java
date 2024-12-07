@@ -12,7 +12,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 
     private List<Category> categories = new ArrayList<>();
-
+    private static int id =1001;
     @Override
     public List<Category> getAllCategory() {
         return categories;
@@ -20,6 +20,18 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void createCategory(Category category) {
+        category.setCategoryId(id++);
         categories.add(category);
+    }
+
+    @Override
+    public String deleteCategory(int categoryId) {
+        Category category =categories.stream().filter(c -> c.getCategoryId()==categoryId)
+                .findFirst().orElse(null);
+        if(category==null){
+            return "Id not found!";
+        }
+        categories.remove(category);
+        return "Category with categoryId: "+categoryId+" deleted successfuly... ";
     }
 }
