@@ -2,6 +2,8 @@ package com.ecommerce.sbf_ecom.controller;
 
 import com.ecommerce.sbf_ecom.model.Category;
 import com.ecommerce.sbf_ecom.service.CategoryService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -26,8 +28,11 @@ public class CategoryController {
         return "Category added successfully...";
     }
     @DeleteMapping("/api/public/categories/{id}")
-    public String deleteCategory(@PathVariable int id){
+    public ResponseEntity<String> deleteCategory(@PathVariable int id){
         String status = categoryService.deleteCategory(id);
-        return status;
+        if(status==null){
+            return new ResponseEntity<>("No data found", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(status,HttpStatus.OK);
     }
 }
