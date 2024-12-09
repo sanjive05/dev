@@ -8,4 +8,5 @@ public interface CategoryService {
     List<Category> getAllCategory();
     void createCategory(Category category);
     public String deleteCategory(int categoryId);
+    public Category updateCategory(Category category,int id);
 }
