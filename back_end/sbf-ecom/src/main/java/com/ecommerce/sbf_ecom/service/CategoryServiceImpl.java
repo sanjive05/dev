@@ -23,7 +23,6 @@ public class CategoryServiceImpl implements CategoryService {
 
 
 
-    private List<Category> categories = new ArrayList<>();
     private static int id =1001;
     @Override
     public List<Category> getAllCategory() {
@@ -33,6 +32,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void createCategory(Category category) {
+      
         System.out.println(category.toString());
         categoryRepository.save(category);
         
@@ -40,22 +40,23 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public String deleteCategory(int categoryId) {
+        List<Category> categories = categoryRepository.findAll();
         categoryRepository.deleteById((long)categoryId);
         Category category =categories.stream().filter(c -> c.getCategoryId()==categoryId)
                 .findFirst().orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Resource not found "));
-
-        categories.remove(category);
+       categoryRepository.delete(category);
         return "Category with categoryId: "+categoryId+" deleted successfuly... ";
     }
 
     @Override
     public Category updateCategory(Category category,int id) {
-
+        List<Category> categories = categoryRepository.findAll();
         Optional<Category> optionalCategory = categories.stream().filter(c-> c.getCategoryId()==id)
                 .findFirst();
         if(optionalCategory.isPresent()){
             Category existingCategory = optionalCategory.get();
             existingCategory.setCategoryName(category.getCategoryName());
+            categoryRepository.save(existingCategory);
             return existingCategory;
         }else {
             throw  new ResponseStatusException(HttpStatus.NOT_FOUND,"Category Not found...");
