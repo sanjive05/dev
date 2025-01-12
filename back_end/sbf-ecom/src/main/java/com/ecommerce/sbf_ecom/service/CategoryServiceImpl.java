@@ -23,7 +23,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 
 
-    private static int id =1001;
+    private static long id =1001;
     @Override
     public List<Category> getAllCategory() {
 
@@ -32,7 +32,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void createCategory(Category category) {
-      
         System.out.println(category.toString());
         categoryRepository.save(category);
         
