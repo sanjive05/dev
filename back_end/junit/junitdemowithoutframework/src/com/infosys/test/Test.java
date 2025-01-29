@@ -6,7 +6,7 @@ import com.sanjive.service.Service;
 public class Test {
 	private static final Logger logger = Logger.getLogger(Test.class.getName());
 	private Service service = new Service();
-	@Test
+
 	void addTest() {
 		int actualSum=service.add(4, 5);
 		int expectedSum = 9;
